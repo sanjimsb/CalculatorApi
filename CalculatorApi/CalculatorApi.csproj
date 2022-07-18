@@ -15,6 +15,9 @@
     <ProjectReference Include="..\Calculation\Calculation.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\Calculator-Models\Calculator-Models.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Remove="Newtonsoft.Json" />

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Calculation;
 using Newtonsoft;
 using Newtonsoft.Json.Linq;
+using Calculator_Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,21 +31,35 @@ namespace CalculatorApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public double Post([FromBody]string value)
+        public double Post([FromBody] Calculator_Models.Calculate value)
         {
-            Console.WriteLine(value);
+            double result = 0;
             try
             {
-                var data = JObject.Parse(value);
-                Console.WriteLine(data);
-                return Calculate.Add((double)data["left"], (double)data["right"]);
+                switch(value.Calculation)
+                {
+                    case "+":
+                        result = Calculation.Calculate.Add((double)value.Left, (double)value.Right);
+                       break;
+                    case "-":
+                        result = Calculation.Calculate.Subtraction((double)value.Left, (double)value.Right);
+                        break;
+                    case "/":
+                        result = Calculation.Calculate.Division((double)value.Left, (double)value.Right);
+                        break;
+                    case "*":
+                        result = Calculation.Calculate.Multiplication((double)value.Left, (double)value.Right);
+                        break;
+
+                }
+                return result;
+                
             }
             catch(Exception)
             {
                 Console.WriteLine("error");
             }
                 
-            
             return 0;
 
         }
